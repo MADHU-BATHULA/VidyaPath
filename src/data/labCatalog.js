@@ -17,7 +17,6 @@ export const LAB_CATALOG = {
             },
         ],
     },
-
     chemistry: {
         name: "Chemistry",
         icon: "🧪",
@@ -36,15 +35,16 @@ export const LAB_CATALOG = {
             },
         ],
     },
-
     programming: {
-        name: "Programming",
+        name: "Programming Labs",
         icon: "💻",
         labs: [
-            { id: "c", title: "C Programming", component: "CLab", level: "All" },
-            { id: "cpp", title: "C++ Programming", component: "CPPLab", level: "All" },
-            { id: "java", title: "Java Programming", component: "JavaLab", level: "All" },
-            { id: "python", title: "Python Programming", component: "PythonLab", level: "All" },
+            { id: "js", title: "JavaScript", component: "JavaScriptLab", executable: true, level: "All" },
+            { id: "python", title: "Python", component: "PythonLab", executable: true, level: "All" },
+            { id: "html", title: "HTML / CSS", component: "HtmlCssLab", executable: true, level: "All" },
+            { id: "c", title: "C Programming", component: "DemoLab", executable: false, level: "All" },
+            { id: "cpp", title: "C++ Programming", component: "DemoLab", executable: false, level: "All" },
+            { id: "java", title: "Java Programming", component: "DemoLab", executable: false, level: "All" },
         ],
     },
 };

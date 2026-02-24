@@ -11,23 +11,30 @@ export default function VirtualLabs({ setActiveLab }) {
                     <h3 style={{ marginBottom: 16 }}>{subject.icon} {subject.name}</h3>
 
                     <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12 }}>
-                        {subject.labs.map(lab => (
-                            <button
-                                key={lab.id}
-                                onClick={() => setActiveLab({ subject: key, lab })}
-                                style={{
-                                    padding: "16px", borderRadius: 12, cursor: "pointer", textAlign: "left",
-                                    border: `1px solid ${C.border}`,
-                                    background: C.surface,
-                                    color: C.text, transition: "all 0.18s", display: "flex", flexDirection: "column"
-                                }}
-                                onMouseEnter={e => { e.currentTarget.style.borderColor = C.accent; }}
-                                onMouseLeave={e => { e.currentTarget.style.borderColor = C.border; }}
-                            >
-                                <div style={{ fontWeight: 600, fontSize: 15 }}>{lab.title}</div>
-                                <div style={{ fontSize: 12, color: C.textMid, marginTop: 4 }}>Level: {lab.level || "All"}</div>
-                            </button>
-                        ))}
+                        {subject.labs.map(lab => {
+                            const executable = lab.executable !== false; // true if missing or true
+                            return (
+                                <button
+                                    key={lab.id}
+                                    onClick={() => executable && setActiveLab({ subject: key, lab })}
+                                    disabled={!executable}
+                                    style={{
+                                        padding: "16px", borderRadius: 12, cursor: executable ? "pointer" : "not-allowed", textAlign: "left",
+                                        border: `1px solid ${C.border}`,
+                                        background: C.surface,
+                                        color: C.text, transition: "all 0.18s", display: "flex", flexDirection: "column",
+                                        opacity: executable ? 1 : 0.6
+                                    }}
+                                    onMouseEnter={e => { if (executable) e.currentTarget.style.borderColor = C.accent; }}
+                                    onMouseLeave={e => { if (executable) e.currentTarget.style.borderColor = C.border; }}
+                                >
+                                    <div style={{ fontWeight: 600, fontSize: 15 }}>{lab.title}</div>
+                                    <div style={{ fontSize: 12, color: C.textMid, marginTop: 4 }}>
+                                        Level: {lab.level || "All"} {!executable && "(Demo)"}
+                                    </div>
+                                </button>
+                            );
+                        })}
                     </div>
                 </div>
             ))}

@@ -2,10 +2,10 @@ import OhmsLawLab from "../labs/physics/OhmsLawLab";
 import PendulumLab from "../labs/physics/PendulumLab";
 import PHScaleLab from "../labs/chemistry/PHScaleLab";
 import ReactionRateLab from "../labs/chemistry/ReactionRateLab";
-import CLab from "../labs/programming/CLab";
-import JavaLab from "../labs/programming/JavaLab";
+import JavaScriptLab from "../labs/programming/JavaScriptLab";
 import PythonLab from "../labs/programming/PythonLab";
-import CPPLab from "../labs/programming/CPPLab";
+import HtmlCssLab from "../labs/programming/HtmlCssLab";
+import DemoLab from "../labs/programming/DemoLab";
 import { C } from "../styles/theme";
 
 const LAB_MAP = {
@@ -13,10 +13,10 @@ const LAB_MAP = {
     PendulumLab,
     PHScaleLab,
     ReactionRateLab,
-    CLab,
-    CPPLab,
-    JavaLab,
+    JavaScriptLab,
     PythonLab,
+    HtmlCssLab,
+    DemoLab,
 };
 
 export default function LabRunner({ activeLab, onBack }) {
@@ -49,7 +49,7 @@ export default function LabRunner({ activeLab, onBack }) {
                 <h2 style={{ fontFamily: "'Sora',sans-serif", fontWeight: 700, fontSize: 20, marginBottom: 16, color: C.accent }}>
                     {activeLab.lab.title}
                 </h2>
-                <LabComponent />
+                <LabComponent language={activeLab.lab.title} />
             </div>
         </div>
     );
