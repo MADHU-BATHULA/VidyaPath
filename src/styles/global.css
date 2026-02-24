@@ -1,0 +1,230 @@
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Sora:wght@400;600;700;800&display=swap');
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background: #0D1117;
+    color: #E6EDF3;
+    font-family: 'Space Grotesk', sans-serif;
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
+::-webkit-scrollbar {
+    width: 6px;
+}
+
+::-webkit-scrollbar-track {
+    background: #0D1117;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #30363D;
+    border-radius: 3px;
+}
+
+@keyframes fadeUp {
+    from {
+        opacity: 0;
+        transform: translateY(18px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes pulse {
+
+    0%,
+    100% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0.4;
+    }
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes shimmer {
+    0% {
+        background-position: -400px 0;
+    }
+
+    100% {
+        background-position: 400px 0;
+    }
+}
+
+@keyframes ripple {
+    0% {
+        transform: scale(1);
+        opacity: 0.6;
+    }
+
+    100% {
+        transform: scale(2.2);
+        opacity: 0;
+    }
+}
+
+.fade-up {
+    animation: fadeUp 0.45s ease both;
+}
+
+.loading-dot {
+    animation: pulse 1.2s ease infinite;
+}
+
+.btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 20px;
+    border-radius: 10px;
+    border: none;
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.18s ease;
+    text-decoration: none;
+    white-space: nowrap;
+}
+
+.btn-primary {
+    background: #F6A623;
+    color: #0D1117;
+}
+
+.btn-primary:hover {
+    background: #ffb84d;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 20px #F6A62330;
+}
+
+.btn-ghost {
+    background: transparent;
+    color: #8B949E;
+    border: 1px solid #30363D;
+}
+
+.btn-ghost:hover {
+    background: #1C2333;
+    color: #E6EDF3;
+}
+
+.btn-green {
+    background: #3FB950;
+    color: #0D1117;
+}
+
+.btn-green:hover {
+    background: #52c46a;
+    transform: translateY(-1px);
+}
+
+.btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    transform: none !important;
+}
+
+.card {
+    background: #1C2333;
+    border: 1px solid #30363D;
+    border-radius: 14px;
+    padding: 20px;
+}
+
+.badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    padding: 3px 10px;
+    border-radius: 20px;
+    font-size: 11px;
+    font-weight: 600;
+}
+
+.input {
+    width: 100%;
+    padding: 10px 14px;
+    border-radius: 10px;
+    background: #161B22;
+    border: 1px solid #30363D;
+    color: #E6EDF3;
+    font-family: inherit;
+    font-size: 14px;
+    outline: none;
+    transition: border-color 0.18s;
+}
+
+.input:focus {
+    border-color: #F6A623;
+}
+
+.input::placeholder {
+    color: #484F58;
+}
+
+select.input {
+    appearance: none;
+    cursor: pointer;
+}
+
+.tag {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 6px;
+    font-size: 11px;
+    font-weight: 600;
+    background: #161B22;
+    color: #8B949E;
+    border: 1px solid #30363D;
+}
+
+.progress-bar {
+    height: 6px;
+    border-radius: 3px;
+    background: #161B22;
+    overflow: hidden;
+}
+
+.progress-fill {
+    height: 100%;
+    border-radius: 3px;
+    background: #F6A623;
+    transition: width 0.6s ease;
+}
+
+.dyslexia-mode {
+    font-family: 'Comic Sans MS', 'Arial', sans-serif !important;
+    font-size: 17px !important;
+    line-height: 2 !important;
+    letter-spacing: 0.08em !important;
+    word-spacing: 0.16em !important;
+}
+
+.dyslexia-mode p,
+.dyslexia-mode span,
+.dyslexia-mode div {
+    background: linear-gradient(transparent 60%, #F6A62318 60%) !important;
+}
+
+.high-contrast-mode {
+    filter: contrast(1.4) !important;
+}
