@@ -1,48 +1,60 @@
-import { useState } from "react";
-import { Landing } from "./components/Landing";
-import { Onboard } from "./components/Onboard";
-import { TeacherDashboard } from "./components/TeacherDashboard";
-import { StudentApp } from "./components/StudentApp";
+import { useEffect, useState } from "react";
+import Login from "./pages/Login";
+import StudentHome from "./pages/StudentHome";
+import TeacherHome from "./pages/TeacherHome";
+import { getCurrentUser } from "./auth/authService";
 import "./styles/global.css";
+import { Landing } from "./components/Landing";
+import ChatbotLauncher from "./components/chatbot/ChatbotLauncher";
 
 export default function App() {
-  const [view, setView] = useState("landing");
-  const [profile, setProfile] = useState(null);
+  const [user, setUser] = useState(null);
+  const [selectedRole, setSelectedRole] = useState(null);
+
+  // Keep accessible states for the student app here
   const [dyslexia, setDyslexia] = useState(false);
   const [highContrast, setHighContrast] = useState(false);
   const [lang, setLang] = useState("en");
   const [studentTab, setStudentTab] = useState("learn");
+
+  useEffect(() => {
+    setUser(getCurrentUser());
+  }, []);
 
   const rootClass = [
     dyslexia && "dyslexia-mode",
     highContrast && "high-contrast-mode"
   ].filter(Boolean).join(" ");
 
-  if (view === "landing")
-    return <div className={rootClass}><Landing onEnter={(role) => setView(role === "teacher" ? "teacher" : "onboard")} /></div>;
+  const renderContent = () => {
+    if (user) {
+      if (user.role === "teacher") {
+        return <TeacherHome user={user} onLogout={() => setUser(null)} />;
+      }
+      const studentProps = {
+        lang, setLang, dyslexia, setDyslexia, highContrast, setHighContrast,
+        tab: studentTab, setTab: setStudentTab, onBack: () => setUser(null)
+      };
+      return <StudentHome user={user} onLogout={() => setUser(null)} studentProps={studentProps} />;
+    }
 
-  if (view === "onboard")
-    return <div className={rootClass}>
-      <Onboard onDone={(p) => { setProfile(p); setLang(p.lang); setDyslexia(p.dyslexia); setView("student"); }} />
-    </div>;
+    if (selectedRole) {
+      return (
+        <Login
+          role={selectedRole}
+          onLogin={setUser}
+          onBack={() => setSelectedRole(null)}
+        />
+      );
+    }
 
-  if (view === "teacher")
-    return <TeacherDashboard onBack={() => setView("landing")} />;
+    return <Landing onEnter={setSelectedRole} />;
+  };
 
   return (
     <div className={rootClass}>
-      <StudentApp
-        profile={profile}
-        lang={lang}
-        setLang={setLang}
-        dyslexia={dyslexia}
-        setDyslexia={setDyslexia}
-        highContrast={highContrast}
-        setHighContrast={setHighContrast}
-        tab={studentTab}
-        setTab={setStudentTab}
-        onBack={() => setView("landing")}
-      />
+      {renderContent()}
+      <ChatbotLauncher />
     </div>
   );
 }
